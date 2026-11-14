@@ -1,0 +1,14 @@
+# Local tooling and private review captures
+.codex/local*
+.impeccable/config.local.json
+.impeccable/review/
+.impeccable/live/
+
+# Build and editor output
+node_modules/
+dist/
+coverage/
+playwright-report/
+.DS_Store
+Thumbs.db
+*.log

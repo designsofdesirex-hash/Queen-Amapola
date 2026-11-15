@@ -128,11 +128,7 @@ window.setInterval(() => {
 
 const galleryGrid = document.querySelector('.gallery-grid');
 const galleryItems = [...galleryGrid.querySelectorAll('.gallery-item')];
-const galleryTargetPageSize = galleryItems.length / 4;
-const galleryPageSize = Array.from({ length: Math.floor(galleryItems.length / 2) }, (_, index) => (index + 1) * 2)
-  .filter((size) => galleryItems.length % size === 0)
-  .sort((first, second) => Math.abs(first - galleryTargetPageSize) - Math.abs(second - galleryTargetPageSize) || second - first)[0]
-  || Math.max(2, Math.ceil(galleryTargetPageSize / 2) * 2);
+const galleryPageSize = Math.min(4, galleryItems.length);
 const galleryPageCount = Math.ceil(galleryItems.length / galleryPageSize);
 let galleryPage = 0;
 let galleryPacks = [];
@@ -152,7 +148,11 @@ function shuffleGalleryPacks() {
   const shuffled = shuffledGalleryItems(galleryItems);
   galleryPacks = Array.from({ length: galleryPageCount }, (_, index) =>
     shuffled.slice(index * galleryPageSize, (index + 1) * galleryPageSize));
-
+  const finalPack = galleryPacks[galleryPacks.length - 1];
+  if (finalPack.length > 0 && finalPack.length < galleryPageSize) {
+    const candidates = shuffledGalleryItems(shuffled.filter((item) => !finalPack.includes(item)));
+    finalPack.push(...candidates.slice(0, galleryPageSize - finalPack.length));
+  }
 }
 
 function galleryPageItems(page) {

@@ -58,8 +58,6 @@ button { color: inherit; cursor: pointer; }
 .tribute::before { background: radial-gradient(ellipse at 8% 12%, rgba(180,102,108,.22), transparent 40%), radial-gradient(ellipse at 94% 92%, rgba(125,79,145,.2), transparent 46%); }
 .social { background: linear-gradient(132deg, #f0e3dd 0%, #eee8dc 48%, #dce9e1 100%); }
 .social::before { background: radial-gradient(ellipse at 8% 6%, rgba(194,133,145,.2), transparent 40%), radial-gradient(ellipse at 95% 94%, rgba(103,151,129,.19), transparent 42%); }
-.lifestyle { background: linear-gradient(126deg, #131812 0%, #1b2118 48%, #182321 100%); }
-.lifestyle::before { background: radial-gradient(ellipse at 8% 18%, rgba(126,146,91,.2), transparent 40%), radial-gradient(ellipse at 92% 96%, rgba(70,128,119,.18), transparent 44%); }
 .gallery { background: linear-gradient(132deg, #eee7e2 0%, #e9e5ed 50%, #e1ebe6 100%); }
 .gallery::before { background: radial-gradient(ellipse at 88% 8%, rgba(185,150,178,.21), transparent 40%), radial-gradient(ellipse at 6% 94%, rgba(124,164,152,.17), transparent 44%); }
 .footer { background: linear-gradient(128deg, #201319 0%, #321820 48%, #241722 100%); }
@@ -138,15 +136,6 @@ h2 { font-size: clamp(4rem, 9vw, 9.5rem); }
 .social-grid a span { font-weight: 700; letter-spacing: .08em; }
 .social-grid a small { color: #57504a; font: italic .9rem/1.4 var(--serif); }
 .social-grid a b { grid-column: 2; grid-row: 1 / span 2; align-self: center; font-size: 1.2rem; font-weight: 400; }
-.lifestyle { padding-bottom: 8rem; }
-.lifestyle-head { display: block; text-align: center; margin-bottom: 4rem; }
-.editorial-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: none; gap: 1rem; width: 100%; max-width: 1000px; margin: 0 auto; }
-.editorial-tile { position: relative; overflow: hidden; padding: 1rem; min-height: 200px; }
-.tile-tall, .tile-red, .tile-paper, .tile-wide { background-color: var(--charcoal); background-repeat: no-repeat; background-position: center; background-size: cover; min-height: 0; }
-.tile-tall { aspect-ratio: 1320 / 1791; grid-row: auto; }
-.tile-red { aspect-ratio: 1320 / 1700; }
-.tile-paper { aspect-ratio: 1080 / 1620; }
-.tile-wide { aspect-ratio: 3072 / 4096; grid-column: auto; }
 .gallery { border-top: 1px solid var(--line-dark); }
 .gallery-heading { text-align: center; margin-bottom: 4rem; }
 .gallery-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; width: 100%; max-width: 1400px; margin: 0 auto; opacity: 1; transition: opacity 360ms cubic-bezier(.22,.61,.36,1); }
@@ -174,7 +163,7 @@ h2 { font-size: clamp(4rem, 9vw, 9.5rem); }
 .footer small { font-size: .62rem; letter-spacing: .12em; color: #fff; }
 
 /* The large statements are centered; the surrounding editorial structure stays asymmetric. */
-.attention h2, .tribute-heading h2, .lifestyle-head h2, .gallery-heading h2 { text-align: center; margin-left: auto; margin-right: auto; }
+.attention h2, .tribute-heading h2, .gallery-heading h2 { text-align: center; margin-left: auto; margin-right: auto; }
 .attention-copy { width: 100%; }
 
 @media (max-width: 760px) {
@@ -192,7 +181,7 @@ h2 { font-size: clamp(4rem, 9vw, 9.5rem); }
   .hero-actions .button { min-width: 160px; gap: .8rem; }
   h1 { width: 100%; max-width: 100%; font-size: clamp(3.2rem, 13.5vw, 6.25rem); }
   .hero-mark { order: 1; width: min(50%, 270px); height: auto; max-height: none; aspect-ratio: 883 / 1370; margin: 0 auto; transform: rotate(2deg); justify-self: auto; }
-  .tribute-heading, .lifestyle-head { display: block; }
+  .tribute-heading { display: block; }
   .tribute-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
   .tribute-image { height: clamp(9rem, 42vw, 10.5rem); }
   .tribute-card-copy { padding: .75rem; }
@@ -207,8 +196,6 @@ h2 { font-size: clamp(4rem, 9vw, 9.5rem); }
   .social-grid a { min-height: 100px; padding: 1rem .7rem; border-bottom: 1px solid var(--line-dark); }
   .social-grid a:nth-child(2n) { border-right: 0; }
   .social-grid a:nth-child(n + 4) { border-bottom: 0; }
-  .editorial-grid { width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .tile-tall, .tile-red, .tile-paper, .tile-wide { grid-column: auto; grid-row: auto; }
   .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem; }
   .gallery-controls { gap: .65rem; }
   .gallery-control { font-size: .75rem; }

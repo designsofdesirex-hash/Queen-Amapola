@@ -142,13 +142,9 @@ h2 { font-size: clamp(4rem, 9vw, 9.5rem); }
 .gallery-grid.is-changing { opacity: 0; }
 .gallery-item { aspect-ratio: 3 / 4; overflow: hidden; margin: 0; background: #d7cbbb; }
 .gallery-item[hidden] { display: none !important; }
-.gallery-item:nth-child(n + 9) { display: none; }
 .gallery-grid[data-ready="true"] .gallery-item { display: block; }
 .gallery-grid[data-ready="true"] .gallery-item[hidden] { display: none !important; }
 .gallery-item img { display: block; width: 100%; height: 100%; object-fit: cover; border: 1px solid var(--line-dark); }
-.gallery-controls { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: clamp(.65rem, 3vw, 2rem); width: fit-content; max-width: 100%; margin: 1.25rem auto 0; }
-.gallery-control { display: inline-flex; align-items: center; justify-content: center; gap: .65rem; padding: .6rem 0; border: 0; border-bottom: 1px solid currentColor; background: transparent; color: var(--ink); font: 700 .75rem var(--sans); letter-spacing: .11em; cursor: pointer; transition: color 180ms ease-out; }
-.gallery-control:hover { color: var(--red); }
 .footer { padding-top: 5rem; padding-bottom: 2rem; }
 .footer-opening { display: grid; grid-template-columns: minmax(0, 1fr) minmax(180px, 280px); gap: 3rem; align-items: end; margin-bottom: 4rem; }
 .footer-mark { font: 700 clamp(4rem, 12vw, 12rem)/.8 var(--serif); letter-spacing: -.08em; }
@@ -197,8 +193,6 @@ h2 { font-size: clamp(4rem, 9vw, 9.5rem); }
   .social-grid a:nth-child(2n) { border-right: 0; }
   .social-grid a:nth-child(n + 4) { border-bottom: 0; }
   .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem; }
-  .gallery-controls { gap: .65rem; }
-  .gallery-control { font-size: .75rem; }
   .attention { grid-template-columns: 1fr; gap: 2.4rem; }
   .attention::after { width: 250px; right: -72px; top: 3.5rem; opacity: .23; }
   .attention-copy, .attention-rule, .attention-note { position: relative; z-index: 1; }
@@ -211,6 +205,10 @@ h2 { font-size: clamp(4rem, 9vw, 9.5rem); }
   .footer-opening > div > p { margin-top: 2rem; }
   .footer-portrait { width: min(72vw, 270px); }
   .footer-last { margin: 3rem 0 4rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-grid { transition: none; }
 }
 
 @media (hover: hover) and (pointer: fine) {

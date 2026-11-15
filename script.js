@@ -128,18 +128,15 @@ window.setInterval(() => {
 
 const galleryGrid = document.querySelector('.gallery-grid');
 const galleryItems = [...galleryGrid.querySelectorAll('.gallery-item')];
-const galleryPrevious = document.querySelector('#gallery-previous');
-const galleryNext = document.querySelector('#gallery-next');
-const galleryPause = document.querySelector('#gallery-pause');
-const galleryPageSize = 8;
+const galleryTargetPageSize = galleryItems.length / 4;
+const galleryPageSize = Array.from({ length: Math.floor(galleryItems.length / 2) }, (_, index) => (index + 1) * 2)
+  .filter((size) => galleryItems.length % size === 0)
+  .sort((first, second) => Math.abs(first - galleryTargetPageSize) - Math.abs(second - galleryTargetPageSize) || second - first)[0]
+  || Math.max(2, Math.ceil(galleryTargetPageSize / 2) * 2);
 const galleryPageCount = Math.ceil(galleryItems.length / galleryPageSize);
-const galleryReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 let galleryPage = 0;
 let galleryPacks = [];
 let galleryTimer;
-let galleryPaused = galleryReducedMotion.matches;
-let galleryHoverPaused = false;
-let galleryFocusPaused = false;
 let galleryChange = 0;
 
 function shuffledGalleryItems(items) {
@@ -156,11 +153,6 @@ function shuffleGalleryPacks() {
   galleryPacks = Array.from({ length: galleryPageCount }, (_, index) =>
     shuffled.slice(index * galleryPageSize, (index + 1) * galleryPageSize));
 
-  const finalPack = galleryPacks[galleryPacks.length - 1];
-  if (finalPack.length > 0 && finalPack.length < 4) {
-    const candidates = shuffled.filter((item) => !finalPack.includes(item));
-    finalPack.push(...shuffledGalleryItems(candidates).slice(0, 4 - finalPack.length));
-  }
 }
 
 function galleryPageItems(page) {
@@ -169,11 +161,9 @@ function galleryPageItems(page) {
 
 function scheduleGallery() {
   window.clearInterval(galleryTimer);
-  if (!galleryPaused && !galleryHoverPaused && !galleryFocusPaused && !document.hidden) {
+  if (!document.hidden) {
     galleryTimer = window.setInterval(() => showGalleryPage(galleryPage + 1), 7600);
   }
-  galleryPause.textContent = galleryPaused ? 'RESUME ROTATION' : 'PAUSE ROTATION';
-  galleryPause.setAttribute('aria-pressed', String(galleryPaused));
 }
 
 async function showGalleryPage(nextPage) {
@@ -201,33 +191,5 @@ shuffleGalleryPacks();
 const firstPack = new Set(galleryPageItems(0));
 galleryItems.forEach((item) => { item.hidden = !firstPack.has(item); });
 galleryGrid.dataset.ready = 'true';
-galleryPrevious.addEventListener('click', () => { void showGalleryPage(galleryPage - 1); });
-galleryNext.addEventListener('click', () => { void showGalleryPage(galleryPage + 1); });
-galleryPause.addEventListener('click', () => {
-  galleryPaused = !galleryPaused;
-  scheduleGallery();
-});
-galleryGrid.addEventListener('pointerenter', () => {
-  galleryHoverPaused = true;
-  scheduleGallery();
-});
-galleryGrid.addEventListener('pointerleave', () => {
-  galleryHoverPaused = false;
-  scheduleGallery();
-});
-galleryGrid.addEventListener('focusin', () => {
-  galleryFocusPaused = true;
-  scheduleGallery();
-});
-galleryGrid.addEventListener('focusout', (event) => {
-  if (!galleryGrid.contains(event.relatedTarget)) {
-    galleryFocusPaused = false;
-    scheduleGallery();
-  }
-});
 document.addEventListener('visibilitychange', scheduleGallery);
-galleryReducedMotion.addEventListener('change', (event) => {
-  if (event.matches) galleryPaused = true;
-  scheduleGallery();
-});
 scheduleGallery();
